@@ -1,0 +1,293 @@
+//pa1 Timer2 ch2 pa7 timer3 ch2 pa8 timer1 ch1 pb6 timer4 ch1
+
+#include <stm32f10x_lib.h>
+#include <stdio.h>
+#include "stm32_init.h"
+#include "serial//serial.h"
+#include "delay//delay.h"
+#include "RTL.h"
+#define  usart_buffer_size 40 //actual buffer size = buffer size -1
+#define  RS485_buffer_size 40 //actual buffer size = buffer size -1
+#define  max_data 100
+#define RelayOn {GPIOA->ODR|=(1<<1 );}
+#define RelayOff {GPIOA->ODR&=~(1<<1);}
+#define RelayToggle {GPIOA->ODR^=(1<<1);}
+#define led_on {GPIOA->ODR|=1<<11;}
+#define led_off {GPIOA->ODR&=~(1<<11);}
+#define led_toggle {GPIOA->ODR^=(1<<11);}
+
+#define DRIVER_RX_DISABLE {GPIOA->ODR|=1<<4;} //low to enable recieving data from driver
+#define DRIVER_RX_ENABLE {GPIOA->ODR&=~(1<<4);}
+#define DRIVER_TX_ENABLE {GPIOA->ODR|=1<<5;}//HI to enable recieving data from driver
+#define DRIVER_TX_DISABLE {GPIOA->ODR&=~(1<<5);}
+
+#define RS485_RX_DISABLE	{GPIOB->ODR|=1<<12;} //low to enable recieving data from driver
+#define RS485_RX_ENABLE		{GPIOB->ODR&=~(1<<12);}
+#define RS485_TX_ENABLE		{GPIOB->ODR|=1<<13;}//HI to enable recieving data from driver
+#define RS485_TX_DISABLE	{GPIOB->ODR&=~(1<<13);}
+
+
+#define DS0 ((GPIOA->IDR&(1<<7))>>7) //pa7 ds0
+#define DS1 ((GPIOB->IDR&(1<<0))>>0) //pb0 ds1
+#define DS2 ((GPIOB->IDR&(1<<1))>>1) //pb1 ds2
+#define DS3 ((GPIOA->IDR&(1<<6))>>6) //pa6 ds3
+#define DS4 ((GPIOB->IDR&(1<<14))>>14) //pb14 ds4
+#define DS5 ((GPIOB->IDR&(1<<15))>>15) //pb15 ds5
+#define DS6 ((GPIOB->IDR&(1<<3))>>3) //pb3 ds6
+
+#define PULSE_HI {GPIOB->ODR|=(1<<8 );}
+#define PULSE_LOW {GPIOB->ODR&=~(1<<8);}
+#define PULSE_TOGGLE {GPIOB->ODR^=(1<<8 );}
+#define DIRECTION_HI {GPIOB->ODR|=(1<<9 );}
+#define DIRECTION_LOW {GPIOB->ODR&=~(1<<9);}
+#define DIRECTION_TOGGLE {GPIOB->ODR^=(1<<9 );}
+
+#define Mosfet1On {GPIOB->ODR|=(1<<4 );}
+#define Mosfet1Off {GPIOB->ODR&=~(1<<4);}
+#define Mosfet1Toggle {GPIOB->ODR^=(1<<4 );}
+#define Mosfet2On {GPIOB->ODR|=(1<<6 );}
+#define Mosfet2Off {GPIOB->ODR&=~(1<<6);}
+#define Mosfet2Toggle {GPIOB->ODR^=(1<<6 );}
+#define Mosfet3On {GPIOB->ODR|=(1<<7 );}
+#define Mosfet3Off {GPIOB->ODR&=~(1<<7);}
+#define Mosfet3Toggle {GPIOB->ODR^=(1<<7 );}
+
+
+#define Key ((GPIOA->IDR&(1<<12))>>12) //pa12 input key
+#define MaxPosition 500
+//===============================defines=============
+#define rollerpos 0
+#define speed1    1
+#define pre       2
+#define output    4
+
+#define cs PORTC.2
+#define rd PORTC.2
+#define cd PORTC.2
+#define wr PORTC.2
+//#define lcdbus PORTD
+#define latch PORTD.4
+/*
+#define cs PORTD.5 
+#define rd PORTB.5 
+#define cd PORTB.7 
+#define wr PORTB.6 
+#define lcdbus PORTC                 
+#define latch PORTD.4                 
+  */
+#define i9 (read2&0x1)                  
+#define i10 (read2&0x2)                  
+#define i11 (read2&0x4)                  
+#define i12 (read2&0x8)                  
+#define i13 (read2&0x10)                  
+#define i14 (read2&0x20)                  
+#define i15 (read2&0x40)                  
+#define i16 (read2&0x80)                  
+#define i17 (read3&0x1)                  
+#define i18 (read3&0x2)                  
+#define i19 (read3&0x4)                  
+#define i20 (read3&0x8)                  
+#define i21 (read3&0x10)                  
+#define i22 (read3&0x20)                 
+#define i23 (read3&0x40)                  
+#define i24 (read3&0x80)                  
+#define i1 (read1&0x1)                  
+#define i2 (read1&0x2)                  
+#define i3 (read1&0x4)                  
+#define i4 (read1&0x8)                  
+#define i5 (read1&0x10)                  
+#define i6 (read1&0x20)                  
+#define i7 (read1&0x40)                  
+#define i8 (read1&0x80)                  
+
+
+#define LMC i1                   
+#define LSB  i10 
+#define LMO i4               
+#define  LMC2 i2                  
+#define  LMS i3                  
+#define  LMO3 i5                  
+#define  LI i8                  
+#define  RULER_SELECT i9                  
+#define  RULER_SELECT1 i10                  
+#define  LgI i15
+#define  LgO i16 
+#define  LPO i17                  
+#define  LPL i18                  
+#define  LAL i19                  
+#define  HET i20                  
+#define   LGO i21                  
+// #define  LGL i22                  
+//#define  LGF i23                  
+#define  MOTON i24                  
+                
+
+                  
+
+//#define i4 (read2&0x10)                  
+//#define i5 (read2&0x8)                  
+//#define i6 (read3&0x20)                  
+//#define i7 (read3&0x10)                  
+//#define i8 (read3&0x1)                  
+//#define i9 (read3&0x2)                  
+#define LUF i6 //(read3&0x4)                  
+//#define i11 (read3&0x8)                  
+#define LUB i7                   
+#define LEF i11           //i11 bood       
+//#define i14 (read2&0x4)                 
+//#define LEB i12                   
+//#define i16 (read3&0x80)                  
+//#define i17 (read1&0x1)                  
+//#define i18 (read1&0x2)                  
+#define LCO i14                   
+#define LCI  i13// (read1&0x4)                  
+#define LGR i22                   
+//#define i22 (read1&0x40)                  
+#define LGF i23                  
+#define beep PORTD.0                  
+//#define i24 (read1&0x10)                  
+  
+ #define LEB  ((i12 && RULER_SELECT1) || (ruler3p4<ruler3 && !RULER_SELECT1)) 
+
+#define setout1 outputa=outputa|1                  
+#define setout2 outputa=outputa|2                  
+#define setout3 outputa=outputa|4                  
+#define setout4 outputa=outputa|8                  
+#define setout5 outputa=outputa|16                  
+#define setout6 outputa=outputa|32                  
+#define setout7 outputa=outputa|64                  
+#define setout8 outputa=outputa|128                  
+#define setout9 outputb=outputb|1                  
+#define setout10 outputb=outputb|2                  
+#define setout11 outputb=outputb|4                  
+#define setout12 outputb=outputb|8                  
+#define setout13 outputb=outputb|16                  
+#define setout14 outputb=outputb|32                  
+#define setout15 outputb=outputb|64                  
+#define setout16 outputb=outputb|128                  
+#define setout17 outputc=outputc|1                  
+#define setout18 outputc=outputc|2                  
+#define setout19 outputc=outputc|4                  
+#define setout20 outputc=outputc|8                  
+#define setout21 outputc=outputc|16                  
+#define setout22 outputc=outputc|32                  
+#define setout23 outputc=outputc|64                 
+#define setout24 outputc=outputc|128                  
+
+#define clrout1 outputa=outputa&0xfe                  
+#define clrout2 outputa=outputa&0xfd                  
+#define clrout3 outputa=outputa&0xfb                  
+#define clrout4 outputa=outputa&0xf7                  
+#define clrout5 outputa=outputa&0xef                  
+#define clrout6 outputa=outputa&0xdf                  
+#define clrout7 outputa=outputa&0xbf                  
+#define clrout8 outputa=outputa&0x7f                  
+#define clrout9 outputb=outputb&0xfe                  
+#define clrout10 outputb=outputb&0xfd                  
+#define clrout11 outputb=outputb&0xfb                  
+#define clrout12 outputb=outputb&0xf7                  
+#define clrout13 outputb=outputb&0xef                  
+#define clrout14 outputb=outputb&0xdf                  
+#define clrout15 outputb=outputb&0xbf                  
+#define clrout16 outputb=outputb&0x7f                  
+#define clrout17 outputc=outputc&0xfe                  
+#define clrout18 outputc=outputc&0xfd                  
+#define clrout19 outputc=outputc&0xfb                  
+#define clrout20 outputc=outputc&0xf7                  
+#define clrout21 outputc=outputc&0xef                  
+#define clrout22 outputc=outputc&0xdf                  
+#define clrout23 outputc=outputc&0xbf                  
+#define clrout24 outputc=outputc&0x7f                                    
+
+#define SAVE_TO_MMC 1
+#define LOAD_TO_MMC 2
+
+//==================================variables===============================================
+
+unsigned char cun2,kd=20,mmc_command=0,mmc_respond;  
+unsigned long int hpriod;
+unsigned long int avrage[6],tempreture[5];
+
+unsigned char read_ppi(unsigned char);
+unsigned int variable[10],recive,lowr,b0,b1,b2,b3,b4,b5,ruler2,in[8],timebase,passcun;
+unsigned char cul,row,keycode,s,number,oldpage,line,id[3],id_counter,timediv,chanel;
+bool  lockkey,lockkey1,keypress,refresh,numberchange,action,automode,finish,timeflag,autokey2,refresh2,ehteyatkey=0,semiauto2,auto3,mmc_key_active;
+char temprecive,imagekey,timefull,hitreal,keywait;
+unsigned char perv1,perv2,perv3,perv4,perv5,perv6,perv7,perv8,perv9,perv10,perv11,perv12,perv13,perv14,perv19;
+unsigned char speedehteyat,speedv1,speedv2,speedv3,speedv4,speedv5,speedv6,speedv7,speedv8,speedv9,speedv10,speedv11,speedv12,speedv13,speedv14,speedv19,timemax;
+unsigned int ruler3p1,ruler3p2,ruler3p3,ruler3p4,ruler1p7,ruler1p4,ruler1p5,ruler1p6,ruler2p4,ritime1,ritime2,ritime3,oiltime,totaltime,timep,tedad;
+unsigned char delay1,delay2,delay3,delay4,delay5,wait,pnum,timer1,s4051=0,c4051=3;
+bool silehteyat,mkeshact,pbri,pmri,pbri1,pmri1,mode,pepm1,pepm,hightemp,timestart,govein,goveout,darbaz,darbasteh,auto4,fffk,numin; 
+//flash unsigned char cyclea[]={14,8,1,2,3,10,9,0,11,5,6,12,4,6,14,7,15};
+unsigned char reccun,ristate,bristate,i3old,oldlgr,oldlgf,yekst,tempp;
+unsigned char rx_wr_index,rx_rd_index,rx_counter,outputa=0,outputb=0,outputc=0,read1,read2,read3,speed,per,color_refresh;
+int alaki2,errorc;
+// This flag is set on USART Receiver buffer overflow
+int rx_buffer_overflow,systemonleft,systemonright,beepcounter;
+bool pmc,pmc1,pmo,pmo1,puf1,puf=0,pub=0,pub1,pgb=0,pgb1,peb1,peb=0,pef1,pef=0,pco1,pco,pci1,pci=0,rollswitch=0,cycleex,mavad2,tempr1,oldi8;
+int page,waitfortemp=100,timer,timer2,hitok,ritime;        
+unsigned int ruler1,ruler1a,ruler3;
+unsigned long int temptemp;
+
+unsigned int secend,ruler1p2,ruler1p3,ruler1p1,ruler1m,ruler2m,ruler3m,ruler2p1,ruler2p2,ruler2p3,oiltemp,delaycun;
+unsigned char secbase,n,j,d2,memseg=10,errorcode=0,staten,oilnumber=0;
+int z,x,y,x1,y1,m,v1=50,k,a,q,u,t,c,x1line=15,x2line=30,y1line=16,y2line=32,line2,conter;
+unsigned long int temp;
+unsigned char led,state,state2,delaytaghe;
+bool temp111,pri1,pri,automatic,semiauto,protection,offbit,moto,oil,hitteron,autokey,lock,lock1,hit1ok,hit2ok,hit3ok,hit4ok,hit5ok,lowtemp,oilcycle,refresh3;
+char soundf;
+
+unsigned char  outon[6],hss[]={10,5,1,1,1},selz[]={99,85,80,60},zone;
+unsigned int add[]={5,2,5,2,1},mmc,mmcflag,justtest; 
+unsigned long int aaa;
+unsigned long int hz[]={75,80,99,100};
+//=========================================end of variables====================
+int usart_buffer_index;
+U8 usart_buffer[usart_buffer_size];
+
+int  RS485_buffer_index;
+char RS485_buffer[RS485_buffer_size];
+
+int Value;
+
+char tempasd[70];
+//09129471281
+//
+
+
+
+
+
+
+//=======================================================================================================
+void TIM1_UP_IRQHandler()
+{
+	TIM1->SR&=~(1<<0); ///reset it flag
+Value++;
+	sprintf(tempasd,"%d\n",Value);
+
+	send_string(tempasd);
+
+}
+//=======================================================================================================
+void USART1_IRQHandler()
+{
+
+
+}
+
+   
+int main(){
+stm32_Init();
+jtag_Disable();
+
+send_string("br9600 delay\n");
+Value=0;
+	
+while(1)
+{
+
+delay_ms(1000);
+}	
+	}//end main
+

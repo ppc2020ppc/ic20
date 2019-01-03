@@ -1,0 +1,110 @@
+Dependencies for Project 'template', Target 'Target 1': (DO NOT MODIFY !)
+F (.\FS_CM3.lib)(0x4D1312FA)()
+F (.\STM32_Init.c)(0x5BD71EFD)(--c99 -c --cpu Cortex-M3 -g -W -O0 --apcs=interwork -I C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x -I C:\Keil_v5\ARM\RV31\LIB\ST-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F10x-D__UVISION_VERSION="524"-o .\stm32_init.o --omf_browse .\stm32_init.crf --depend .\stm32_init.d)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_lib.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_map.h)(0x5B94E954)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_conf.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_type.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\cortexm3_macro.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_adc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_bkp.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_can.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_crc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_dac.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_dbgmcu.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_dma.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_exti.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_flash.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_fsmc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_gpio.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_i2c.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_iwdg.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_nvic.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_pwr.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_rcc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_rtc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_sdio.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_spi.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_systick.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_tim.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_usart.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_wwdg.h)(0x4E784B4A)
+I (STM32_Reg.h)(0x48D86704)
+F (.\STM32_Init.h)(0x48D86704)()
+F (.\STM32F10x.s)(0x4F829FEC)(--cpu Cortex-M3 -g --apcs=interwork -IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F10x--pd "__UVISION_VERSION SETA 524"--list .\stm32f10x.lst --xref -o .\stm32f10x.o --depend .\stm32f10x.d)
+F (.\STM32F10xR.LIB)(0x4D2BF716)()
+F (.\main.c)(0x5BE97F74)(--c99 -c --cpu Cortex-M3 -g -W -O0 --apcs=interwork -I C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x -I C:\Keil_v5\ARM\RV31\LIB\ST-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F10x-D__UVISION_VERSION="524"-o .\main.o --omf_browse .\main.crf --depend .\main.d)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_lib.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_map.h)(0x5B94E954)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_conf.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_type.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\cortexm3_macro.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_adc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_bkp.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_can.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_crc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_dac.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_dbgmcu.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_dma.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_exti.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_flash.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_fsmc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_gpio.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_i2c.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_iwdg.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_nvic.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_pwr.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_rcc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_rtc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_sdio.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_spi.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_systick.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_tim.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_usart.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_wwdg.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588BC28C)
+I (stm32_init.h)(0x48D86704)
+I (serial//serial.h)(0x58D693AC)
+I (delay//delay.h)(0x4FBB7B7C)
+I (C:\Keil_v5\ARM\RV31\INC\RTL.h)(0x4CB2A6F4)
+I (colormonitor.c)(0x5B9A9B33)
+I (C:\Keil_v5\ARM\RV31\INC\math.h)(0x4E784A46)
+I (eeprom.h)(0x5A01B120)
+I (C:\Keil_v5\ARM\RV31\INC\string.h)(0x4E784A46)
+I (e2prom.c)(0x5A01B48E)
+F (.\serial\serial.c)(0x58D6B1A8)(--c99 -c --cpu Cortex-M3 -g -W -O0 --apcs=interwork -I C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x -I C:\Keil_v5\ARM\RV31\LIB\ST-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F10x-D__UVISION_VERSION="524"-o .\serial.o --omf_browse .\serial.crf --depend .\serial.d)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_lib.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_map.h)(0x5B94E954)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_conf.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_type.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\cortexm3_macro.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_adc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_bkp.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_can.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_crc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_dac.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_dbgmcu.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_dma.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_exti.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_flash.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_fsmc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_gpio.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_i2c.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_iwdg.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_nvic.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_pwr.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_rcc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_rtc.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_sdio.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_spi.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_systick.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_tim.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_usart.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x\stm32f10x_wwdg.h)(0x4E784B4A)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x588BC28C)
+F (.\serial\serial.h)(0x58D693AC)()
+F (.\delay\delay.c)(0x4FBE52EE)(--c99 -c --cpu Cortex-M3 -g -W -O0 --apcs=interwork -I C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x -I C:\Keil_v5\ARM\RV31\LIB\ST-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F10x-D__UVISION_VERSION="524"-o .\delay.o --omf_browse .\delay.crf --depend .\delay.d)
+F (.\delay\delay.h)(0x4FBB7B7C)()
+F (.\CRC\lib_crc.c)(0x5396A4DA)(--c99 -c --cpu Cortex-M3 -g -W -O0 --apcs=interwork -I C:\Keil_v5\ARM\RV31\INC\ST\STM32F10x -I C:\Keil_v5\ARM\RV31\LIB\ST-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\ST\STM32F10x-D__UVISION_VERSION="524"-o .\lib_crc.o --omf_browse .\lib_crc.crf --depend .\lib_crc.d)
+I (CRC\lib_crc.h)(0x5396A4B6)
+F (.\CRC\lib_crc.h)(0x5396A4B6)()
